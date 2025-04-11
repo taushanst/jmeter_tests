@@ -33,7 +33,7 @@ jobs:
           & $jmeterPath -n -t $testFile -l $resultsFile -e -o $reportFile
 
       - name: Upload JMeter Results
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: jmeter-results
           path: results/
