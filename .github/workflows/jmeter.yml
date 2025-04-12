@@ -24,13 +24,16 @@ jobs:
       - name: Run JMeter Test
         shell: pwsh
         run: |
-          $jmeterPath = "$Env:USERPROFILE\apache-jmeter-5.4.1\bin\jmeter.bat"
-          $testFile = "tests\Test_1_example.com.jmx"
-          $resultsFile = "results\jmeter_results.jtl"
-          $reportFile = "results\jmeter_report.html"
+          $jmeterPath = "$Env:USERPROFILE\\apache-jmeter-5.4.1\\bin\\jmeter.bat"
+          $testFile = "tests\\Test_1_example.com.jmx"
+          $resultsFile = "results\\jmeter_results.jtl"
+          $reportFile = "results\\jmeter_report"
 
           New-Item -ItemType Directory -Force -Path results
           & $jmeterPath -n -t $testFile -l $resultsFile -e -o $reportFile
+
+          Write-Host "🔍 Checking results folder content:"
+          Get-ChildItem -Recurse results
 
       - name: Upload JMeter Results
         uses: actions/upload-artifact@v4
